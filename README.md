@@ -64,7 +64,7 @@
 
 ## 📁 Arquivos
 
-- `grand-slam-futebol-v2.pdf` — Infográfico atualizado com Gerd Müller e ligas corrigidas
+- `grand-slam-futebol-v4.pdf` — Infográfico atualizado com Gerd Müller e ligas corrigidas
 
 ---
 
