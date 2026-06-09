@@ -36,7 +36,7 @@
 |---|---|---|---|
 | 1 | Pelé | 6 Brasileirão | **78,0** |
 | 2 | Lionel Messi | 10 La Liga + 2 Ligue 1 = 12 | **59,3** |
-| 3 | Gerd Müller | 4 Bundesliga | **~51,3** |
+| 3 | Gerd Müller | 4 Bundesliga | **51,3** |
 | 4 | Ronaldo Fenômeno (R9) | 1 Brasileirão | **50,8** |
 | 5 | Cristiano Ronaldo | 3 PL + 2 La Liga + 2 Serie A + 1 Saudi = 8 | **33,7** |
 | 6 | Maradona | 1 Argentino + 2 Serie A = 3 | **32,9** |
@@ -56,7 +56,7 @@
 
 **CR7 (5º) maior penalidade do modelo:** Apesar dos 5 Champions e 8 ligas nacionais (3 Premier League, 2 La Liga, 2 Serie A, 1 Saudi Pro League), todos os 8 gols em Copas do Mundo foram na fase de grupos. **Nunca marcou em mata-mata** em Copas. O modelo por fase penaliza exatamente isso.
 
-**Maradona (6º):** 1 Copa do Mundo, 3 ligas nacionais (1 Campeonato Argentino pelo Boca Juniors + 2 Serie A pelo Napoli). O modelo por fase revela o verdadeiro valor de 1986 — 4G+4A nas quartas/semi/final valem muito mais que gols concentrados nos grupos, o que coloca Maradona à frente de Neymar.
+**Maradona (6º):** 1 Copa do Mundo, 3 ligas nacionais (1 Campeonato Argentino pelo Boca Juniors + 2 Serie A pelo Napoli). O modelo por fase revela o verdadeiro valor de 1986  4G+4A nas quartas/semi/final valem muito mais que gols concentrados nos grupos, o que coloca Maradona à frente de Neymar.
 
 **Neymar Jr (7º):** 1 Champions League, 1 Libertadores, 3 ligas nacionais (1 Brasileirão + 2 Ligue 1).
 
@@ -70,7 +70,7 @@
 
 ## ⚙️ Notas Técnicas
 
-- **Ligas contabilizadas:** apenas campeonatos nacionais de 1ª divisão (Brasileirão, La Liga, Serie A, Premier League, Ligue 1, Bundesliga, Campeonato Argentino, Saudi Pro League). Títulos estaduais não são contabilizados pois os demais jogadores nunca disputaram equivalentes regionais. Vale registrar, porém: Pelé conquistou **10 Campeonatos Paulistas** pelo Santos, competição altamente disputada contra Corinthians, Palmeiras e São Paulo, numa era em que os jogadores acumulavam torneios nacionais, estaduais e internacionais simultaneamente — calendário muito mais denso que o atual.
+- **Ligas contabilizadas:** apenas campeonatos nacionais de 1ª divisão (Brasileirão, La Liga, Serie A, Premier League, Ligue 1, Bundesliga, Campeonato Argentino, Saudi Pro League). Títulos estaduais não são contabilizados pois os demais jogadores nunca disputaram equivalentes regionais. Vale registrar, porém: Pelé conquistou **10 Campeonatos Paulistas** pelo Santos, competição altamente disputada contra Corinthians, Palmeiras e São Paulo, numa era em que os jogadores acumulavam torneios nacionais, estaduais e internacionais simultaneamente calendário muito mais denso que o atual.
 - **Mundial de Clubes** inclui a Copa Intercontinental (até 2004)
 - Todos os dados são **oficiais**, sem estimativas ou dados não verificados
 
