@@ -1,83 +1,67 @@
-# 🏆 O Grand Slam do Futebol
+# O Grand Slam do Futebol — versão notebook
 
-> Copa do Mundo, Champions League, Libertadores e Mundial de Clubes com pesos diferenciados. Média geral de gols, participações (G+A) na Copa do Mundo ponderadas por fase, um gol na final vale 3× mais que na fase de grupos e títulos de liga nacional. Somente dados oficiais.
+Reconstrução em código (pandas + Python) do ranking "Grand Slam do Futebol", originalmente publicado como README + infográfico em PDF sem dados brutos versionados.
 
----
+## O que mudou em relação à v5 (PDF)
 
-## 📊 Metodologia de Pontuação
+A v5 existia apenas como narrativa + PDF, sem tabela de dados nem código. Esta versão:
 
-| Critério | Peso |
-|---|---|
-| 🏆 Copa do Mundo | ×5 pts por título |
-| ⭐ Champions League | ×3 pts por título |
-| 🌎 Libertadores | ×2 pts por título |
-| 🌍 Mundial de Clubes | ×1 pt por título |
-| ⚽ Média de gols/jogo | ×6 pts |
-| 🌟 (G+A) Copa do Mundo ponderado ÷ jogos | ×20 pts |
-| 🥇 Ligas nacionais de 1ª divisão | ×0,5 pt por título |
+- Implementa a metodologia como função Python reutilizável, não como cálculo manual
+- Reconstrói o dataset dos 7 jogadores originais **usando os números oficiais extraídos do PDF v5** (títulos, gols por fase, ligas nacionais) — validado no notebook: a fórmula recalculada bate com os scores publicados (78,0 do Pelé, 59,3 do Messi etc.) com diferença menor que 0,05 ponto, só arredondamento
+- Adiciona a Copa do Mundo de 2026 (Espanha campeã, Argentina vice, 1-0 na prorrogação) e atualiza Messi + adiciona Mbappé como novo entrante (esse sim reconstruído por pesquisa pública, já que não estava na v5 original)
 
-### Ponderação por fase na Copa do Mundo
+## Metodologia (herdada da v5)
 
-| Fase | Multiplicador |
-|---|---|
-| Grupos | ×1 |
-| Oitavas de final | ×1,5 |
-| Quartas de final | ×2 |
-| Semifinal | ×2,5 |
-| Final | ×3 |
+```
+Score = 5 × (títulos de Copa do Mundo)
+      + 3 × (títulos de Champions League)
+      + 2 × (títulos de Libertadores)
+      + 1 × (títulos de Mundial de Clubes)
+      + 6 × (média de gols por jogo, carreira)
+      + 20 × (índice de G+A em Copas do Mundo, ponderado por fase)
+      + 0.5 × (títulos de liga nacional)
+```
 
-> **Score final** = Títulos ponderados + média geral de gols ×6 + (G+A) Copa ponderado ÷ jogos ×20 + ligas ×0,5
+Multiplicador por fase nas Copas do Mundo (gol/assistência vale mais quanto mais avançada a fase):
+grupos ×1 → oitavas ×1.5 → quartas ×2 → semifinal ×2.5 → final ×3 (mesma lógica do projeto de seleções).
 
----
+## Estrutura
 
-## 🥇 Ranking Final
+```
+grand_slam_futebol/
+├── README.md
+├── requirements.txt
+├── data/
+│   └── jogadores.csv       # dataset reconstruído, com fonte de cada estimativa documentada no notebook
+└── notebooks/
+    └── 01_ranking_jogadores.ipynb
+```
 
-| # | Jogador | Ligas nacionais | Score |
-|---|---|---|---|
-| 1 | Pelé | 6 Brasileirão | **78,0** |
-| 2 | Lionel Messi | 10 La Liga + 2 Ligue 1 = 12 | **59,3** |
-| 3 | Gerd Müller | 4 Bundesliga | **51,3** |
-| 4 | Ronaldo Fenômeno (R9) | 1 Brasileirão | **50,8** |
-| 5 | Cristiano Ronaldo | 3 PL + 2 La Liga + 2 Serie A + 1 Saudi = 8 | **33,7** |
-| 6 | Maradona | 1 Argentino + 2 Serie A = 3 | **32,9** |
-| 7 | Neymar Jr | 1 Brasileirão + 2 Ligue 1 = 3 | **26,6** |
+## Anexo: Brasileirão x La Liga, qual título é mais raro?
 
----
+A fórmula dá o mesmo peso (×0,5) para título de liga nacional, seja Brasileirão ou La Liga — deliberadamente, porque ela mede resultado (título, gol), não tenta arbitrar "qual liga é tecnicamente melhor" (isso é opinião, sem resposta objetiva).
 
-## 🔍 Destaques da Análise
+Só que existe uma pergunta diferente, essa sim mensurável: **quantos clubes diferentes realmente têm chance de ser campeão em cada liga?** Analisado em `notebooks/02_concentracao_ligas.ipynb`:
 
-**Pelé (1º):** Três Copas do Mundo, média de 0,90 gol/jogo em 757 gols/840 jogos e participações decisivas em todas as fases eliminatórias consolidam O Rei no topo com folga. 6 títulos do Brasileirão (Taça Brasil + Robertão).
+- **La Liga** (1929–2026, ~97 temporadas): só **9 clubes diferentes** já foram campeões — Real Madrid (36) e Barcelona (29) sozinhos somam 65 dos ~95 títulos distribuídos
+- **Brasileirão**, era pontos corridos (2003–2025, 23 temporadas): também **9 clubes diferentes** foram campeões — mas levou só 23 anos pra chegar nesse número, contra quase 100 anos da Espanha
+- **Índice de concentração (HHI):** Brasileirão 1.364 vs La Liga 2.620 — a La Liga é quase 2× mais concentrada
 
-**Messi (2º):** Quatro Champions League, Copa do Mundo 2022, 12 ligas nacionais (10 La Liga + 2 Ligue 1) e a maior pontuação em G+A Copa do Mundo entre os jogadores modernos.
+Conclusão registrada: **ser campeão brasileiro parece estatisticamente mais raro/imprevisível do que ser campeão espanhol**, mesmo sem entrar no mérito de qual liga tem o nível técnico mais alto (pergunta diferente, sem resposta objetiva). A fórmula principal não muda por causa disso — fica como observação documentada, com dado por trás.
 
-**Gerd Müller (3º):** Der Bomber é o grande esquecido dos rankings modernos. 1 Copa do Mundo (1974, gol na final), 3 Champions League, 1 Copa Intercontinental, 4 Bundesligas e média de 0,85 gol/jogo em toda a carreira. Seus 10 gols na Copa de 1970, incluindo 1 nas quartas e 2 na semifinal, pesam muito no modelo por fase. Praticamente empatado com Ronaldo Fenômeno no score, os dois são os melhores centroavantes puros da história.
+## Infográfico (v6)
 
-**Ronaldo Fenômeno (4º):** Duas Copas do Mundo e média de 0,67 gol/jogo com 414 gols em 616 jogos. Desempenho excepcional no mata-mata das Copas.
+`infografico/grand-slam-futebol-v6.pdf` é o infográfico atualizado, no mesmo estilo visual do `grand-slam-futebol-v5.pdf` original, já com Messi atualizado e Mbappé como novo entrante. Fonte editável em `infografico/grand-slam-futebol-v6.html` (HTML/CSS, renderizado para PDF via Chromium headless).
 
-**CR7 (5º) maior penalidade do modelo:** Apesar dos 5 Champions e 8 ligas nacionais (3 Premier League, 2 La Liga, 2 Serie A, 1 Saudi Pro League), todos os 8 gols em Copas do Mundo foram na fase de grupos. **Nunca marcou em mata-mata** em Copas. O modelo por fase penaliza exatamente isso.
+Para publicar no repositório `grand-slam-futebol` no GitHub, basta colocar o PDF na raiz do repo do jeito que a v5 já está (ex.: renomear para `grand-slam-futebol-v6.pdf` e linkar no README do repo).
 
-**Maradona (6º):** 1 Copa do Mundo, 3 ligas nacionais (1 Campeonato Argentino pelo Boca Juniors + 2 Serie A pelo Napoli). O modelo por fase revela o verdadeiro valor de 1986  4G+4A nas quartas/semi/final valem muito mais que gols concentrados nos grupos, o que coloca Maradona à frente de Neymar.
+## Status
 
-**Neymar Jr (7º):** 1 Champions League, 1 Libertadores, 3 ligas nacionais (1 Brasileirão + 2 Ligue 1).
-
----
-
-## 📁 Arquivos
-
-- `grand-slam-futebol-v5.pdf` — Infográfico atualizado com Gerd Müller e ligas corrigidas
-
----
-
-## ⚙️ Notas Técnicas
-
-- **Ligas contabilizadas:** apenas campeonatos nacionais de 1ª divisão (Brasileirão, La Liga, Serie A, Premier League, Ligue 1, Bundesliga, Campeonato Argentino, Saudi Pro League). Títulos estaduais não são contabilizados pois os demais jogadores nunca disputaram equivalentes regionais. Vale registrar, porém: Pelé conquistou **10 Campeonatos Paulistas** pelo Santos, competição altamente disputada contra Corinthians, Palmeiras e São Paulo, numa era em que os jogadores acumulavam torneios nacionais, estaduais e internacionais simultaneamente calendário muito mais denso que o atual.
-- **Mundial de Clubes** inclui a Copa Intercontinental (até 2004)
-- Todos os dados são **oficiais**, sem estimativas ou dados não verificados
-
----
-
-## 👤 Autor
-
-**Marcelo Carvalho** · 2026  
-💼 [linkedin.com/in/earth-marcelo](https://linkedin.com/in/earth-marcelo)  
-💾 [github.com/earth-marcelo](https://github.com/earth-marcelo)
+- [x] Reconstrução da metodologia em código
+- [x] Dataset com os números oficiais dos 7 jogadores, extraídos do PDF v5
+- [x] Validação: score recalculado bate com o score publicado (diferença < 0,05 pt)
+- [x] Atualização com a Copa de 2026 (Messi sobe para 65,2 pts; Mbappé entra em 3º com 55,9 pts)
+- [ ] Refinar a base de carreira do Mbappé (reconstruída por pesquisa pública, menos confiável que os outros 7)
+- [ ] Expandir dataset para mais jogadores
+- [x] Análise de concentração de título (Brasileirão x La Liga) documentada, sem alterar a fórmula
+- [ ] Aplicar o mesmo processo ao projeto Grand Slam das Seleções (dados oficiais já extraídos do PDF, faltando notebook)

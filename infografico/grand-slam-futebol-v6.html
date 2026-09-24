@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>O Grand Slam do Futebol — v6</title>
+<style>
+  @page { size: 1275px 1500px; margin: 0; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #f3ede2;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #1c1c1c;
+    width: 1275px;
+  }
+  .page { padding: 40px 48px 32px; }
+  .kicker {
+    letter-spacing: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #6b6558;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-size: 56px;
+    font-weight: 800;
+    margin: 0 0 16px;
+    letter-spacing: -1px;
+  }
+  h1 .slam { color: #2f7a3b; }
+  .intro {
+    max-width: 980px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #3a362e;
+    border-left: 4px solid #2f7a3b;
+    padding-left: 16px;
+    margin-bottom: 22px;
+  }
+  .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+  .badge {
+    border: 1px solid #cfc7b6;
+    background: #fffdf9;
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 12.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .badge .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .badges2 { display: flex; gap: 8px; margin-bottom: 6px; align-items: center; }
+  .badges2 .label { font-size: 12px; font-weight: 700; color: #6b6558; margin-right: 4px; }
+  .fase-badge {
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .new-badge {
+    background: #d62728;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    border-radius: 5px;
+    padding: 2px 7px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 26px;
+    background: #fffdf9;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  thead th {
+    text-align: left;
+    font-size: 10.5px;
+    letter-spacing: 0.5px;
+    color: #7a7362;
+    text-transform: uppercase;
+    padding: 12px 10px;
+    border-bottom: 2px solid #e4dcc9;
+  }
+  tbody td {
+    padding: 14px 10px;
+    border-bottom: 1px solid #ece5d5;
+    vertical-align: top;
+    font-size: 13px;
+  }
+  tr.updated td { background: #fbf3e6; }
+  .rank {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: #2f2b22; color: #fff; font-weight: 800; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  tr:nth-child(1) .rank { background: #c9a227; }
+  .player-name { font-weight: 800; font-size: 15px; }
+  .player-sub { font-size: 11px; color: #7a7362; margin-top: 2px; }
+  .icons { font-size: 14px; letter-spacing: 1px; white-space: nowrap; }
+  .dash { color: #b9b1a0; }
+  .avg-goals { font-weight: 700; }
+  .avg-goals .games { display: block; font-weight: 400; font-size: 10.5px; color: #948c78; }
+  .ga-value { font-weight: 700; color: #b5561f; }
+  .ga-detail { font-size: 10.5px; color: #6b6558; line-height: 1.4; margin-top: 2px; max-width: 210px; }
+  .score { font-size: 22px; font-weight: 800; color: #2f7a3b; }
+  .score-bar { height: 5px; background: #e4dcc9; border-radius: 3px; margin-top: 6px; width: 90px; overflow: hidden; }
+  .score-bar-fill { height: 100%; background: #2f7a3b; }
+  tr:nth-child(1) .score { color: #8a6a10; }
+  tr:nth-child(1) .score-bar-fill { background: #c9a227; }
+  .footnote {
+    margin-top: 20px;
+    font-size: 10.5px;
+    color: #6b6558;
+    line-height: 1.6;
+    border-top: 1px solid #e4dcc9;
+    padding-top: 14px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: #4a4638;
+  }
+  .footer a { color: #2f7a3b; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="kicker">TÍTULOS PONDERADOS · MÉDIA GOLEADORA · COPA DO MUNDO POR FASE · LIGAS NACIONAIS DE 1ª DIVISÃO · v6 — ATUALIZADO COPA 2026</div>
+  <h1>O GRAND <span class="slam">SLAM</span> DO FUTEBOL</h1>
+  <div class="intro">
+    Copa do Mundo, Champions, Libertadores e Mundial de Clubes com pesos diferenciados. Média geral de gols, participações (G+A) na Copa do
+    Mundo ponderadas por fase — um gol na final vale 3× mais que um na fase de grupos — e títulos de liga nacional de 1ª divisão. Somente
+    dados oficiais. <strong>Versão 6:</strong> inclui a Copa do Mundo de 2026 (Espanha campeã sobre a Argentina, 1-0 na prorrogação) — Messi
+    atualizado e Mbappé como novo entrante.
+  </div>
+
+  <div class="badges">
+    <span class="badge"><span class="dot" style="background:#d68a1f"></span>Copa do Mundo ×5 pts</span>
+    <span class="badge"><span class="dot" style="background:#c9a227"></span>Champions ×3 pts</span>
+    <span class="badge"><span class="dot" style="background:#2b6fa8"></span>Libertadores ×2 pts</span>
+    <span class="badge"><span class="dot" style="background:#2f8f7a"></span>Mundial Clubes ×1 pt</span>
+    <span class="badge"><span class="dot" style="background:#4a7a2f"></span>Média gols/jogo ×6 pts</span>
+    <span class="badge"><span class="dot" style="background:#b5561f"></span>(G+A) Copa por fase ÷ jogos ×20 pts</span>
+    <span class="badge"><span class="dot" style="background:#8a8067"></span>Ligas nacionais 1ª div. ×0,5 pt</span>
+  </div>
+  <div class="badges2">
+    <span class="label">Peso por fase:</span>
+    <span class="fase-badge" style="background:#4a7a2f">Grupos ×1</span>
+    <span class="fase-badge" style="background:#c9762b">Oitavas ×1,5</span>
+    <span class="fase-badge" style="background:#2b6fa8">Quartas ×2</span>
+    <span class="fase-badge" style="background:#7a4fa8">Semi ×2,5</span>
+    <span class="fase-badge" style="background:#2f2b22">Final ×3</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Jogador</th>
+        <th>Copa do<br>Mundo ×5</th>
+        <th>Champions<br>×3</th>
+        <th>Liberta-<br>dores ×2</th>
+        <th>Mundial<br>Clubes ×1</th>
+        <th>Média<br>gols/j ×6</th>
+        <th>(G+A) Copa ponderado<br>÷ jogos ×20</th>
+        <th>Ligas<br>nac. ×0,5</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><div class="rank">1</div></td>
+        <td>
+          <div class="player-name">Pelé</div>
+          <div class="player-sub">O Rei — Brasil</div>
+        </td>
+        <td class="icons">🏆🏆🏆</td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons">🌎🌎</td>
+        <td class="icons">🌍🌍</td>
+        <td class="avg-goals">0,90<span class="games">757g/840j</span></td>
+        <td>
+          <div class="ga-value">48,6</div>
+          <div class="ga-detail">6G+3A grp · 2G+2A qrt · 1G+1A semi · 2G+2A final</div>
+        </td>
+        <td><strong>6</strong><div class="player-sub">Brasileirão</div></td>
+        <td>
+          <div class="score">78,0</div>
+          <div class="score-bar"><div class="score-bar-fill" style="width:100%"></div></div>
+        </td>
+      </tr>
+
+      <tr class="updated">
+        <td><div class="rank">2</div></td>
+        <td>
+          <div class="player-name">Lionel Messi<span class="new-badge" style="background:#2f7a3b">ATUALIZADO</span></div>
+          <div class="player-sub">Argentina — v6: +Copa 2026</div>
+        </td>
+        <td class="icons">🏆</td>
+        <td class="icons">⭐⭐⭐⭐</td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons">🌍🌍🌍</td>
+        <td class="avg-goals">0,87<span class="games">~910g/~1050j</span></td>
+        <td>
+          <div class="ga-value">33,9*</div>
+          <div class="ga-detail">Base v5 (36,5/26j) + 2026 (19,5/7j): grupos 4G+1A · oit 2G · qua 1G+1A · semi 1G+2A · final 0G — total 56,0 pond. / 33j</div>
+        </td>
+        <td><strong>12</strong><div class="player-sub">10 La Liga · 2 Ligue 1</div></td>
+        <td>
+          <div class="score">65,2</div>
+          <div class="score-bar"><div class="score-bar-fill" style="width:84%"></div></div>
+        </td>
+      </tr>
+
+      <tr class="updated">
+        <td><div class="rank">3</div></td>
+        <td>
+          <div class="player-name">Kylian Mbappé<span class="new-badge">NOVO v6</span></div>
+          <div class="player-sub">França — NOVO na v6</div>
+        </td>
+        <td class="icons">🏆</td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="avg-goals">0,75<span class="games">reconstruído</span></td>
+        <td>
+          <div class="ga-value">42,9*</div>
+          <div class="ga-detail">2018+2022 reconstruído (20/14j) + 2026 (25/7j): artilheiro, 10G+4A, recorde em mata-mata · França 4º lugar — total 45,0 pond. / 21j</div>
+        </td>
+        <td><strong>7</strong><div class="player-sub">6 Ligue 1 · 1 La Liga</div></td>
+        <td>
+          <div class="score">55,9</div>
+          <div class="score-bar"><div class="score-bar-fill" style="width:72%"></div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td><div class="rank">4</div></td>
+        <td>
+          <div class="player-name">Gerd Müller</div>
+          <div class="player-sub">Der Bomber — Alemanha</div>
+        </td>
+        <td class="icons">🏆</td>
+        <td class="icons">⭐⭐⭐</td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons">🌍</td>
+        <td class="avg-goals">0,85<span class="games">~656g/~775j</span></td>
+        <td>
+          <div class="ga-value">29,2</div>
+          <div class="ga-detail">8G grp · 1G qrt · 2G semi · 1G final (74) · 10G em 1970</div>
+        </td>
+        <td><strong>4</strong><div class="player-sub">Bundesliga</div></td>
+        <td>
+          <div class="score">51,3</div>
+          <div class="score-bar"><div class="score-bar-fill" style="width:66%"></div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td><div class="rank">5</div></td>
+        <td>
+          <div class="player-name">Ronaldo Fenômeno</div>
+          <div class="player-sub">R9 — Brasil</div>
+        </td>
+        <td class="icons">🏆🏆</td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons">🌍</td>
+        <td class="avg-goals">0,67<span class="games">414g/616j</span></td>
+        <td>
+          <div class="ga-value">35,3</div>
+          <div class="ga-detail">8G+1A grp · 5G+1A oit · 2G qrt · 1G semi · 2G+1A final</div>
+        </td>
+        <td><strong>1</strong><div class="player-sub">Brasileirão</div></td>
+        <td>
+          <div class="score">50,8</div>
+          <div class="score-bar"><div class="score-bar-fill" style="width:65%"></div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td><div class="rank">6</div></td>
+        <td>
+          <div class="player-name">Cristiano Ronaldo</div>
+          <div class="player-sub">Portugal</div>
+        </td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons">⭐⭐⭐⭐⭐</td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons">🌍</td>
+        <td class="avg-goals">0,77<span class="games">~973g/~1260j</span></td>
+        <td>
+          <div class="ga-value">9,1</div>
+          <div class="ga-detail">8G+2A grp · 0 em mata-mata</div>
+        </td>
+        <td><strong>8</strong><div class="player-sub">3 PL · 2 La Liga · 2 Serie A · 1 Saudi</div></td>
+        <td>
+          <div class="score">33,7</div>
+          <div class="score-bar"><div class="score-bar-fill" style="width:43%"></div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td><div class="rank">7</div></td>
+        <td>
+          <div class="player-name">Maradona</div>
+          <div class="player-sub">El Pibe de Oro — Argentina</div>
+        </td>
+        <td class="icons">🏆</td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="avg-goals">0,51<span class="games">346g/679j</span></td>
+        <td>
+          <div class="ga-value">23,3</div>
+          <div class="ga-detail">4G grp · 1A oit · 2G+1A qrt · 2G+2A semi · 1A final</div>
+        </td>
+        <td><strong>3</strong><div class="player-sub">1 Arg. · 2 Serie A</div></td>
+        <td>
+          <div class="score">32,9</div>
+          <div class="score-bar"><div class="score-bar-fill" style="width:42%"></div></div>
+        </td>
+      </tr>
+
+      <tr>
+        <td><div class="rank">8</div></td>
+        <td>
+          <div class="player-name">Neymar Jr</div>
+          <div class="player-sub">Brasil</div>
+        </td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="icons">⭐</td>
+        <td class="icons">🌎</td>
+        <td class="icons"><span class="dash">—</span></td>
+        <td class="avg-goals">0,62<span class="games">435g/704j</span></td>
+        <td>
+          <div class="ga-value">16,4</div>
+          <div class="ga-detail">4G+1A grp · 2G+1A oit · 1A qrt · 0 semi/final</div>
+        </td>
+        <td><strong>3</strong><div class="player-sub">1 Bras. · 2 Ligue 1</div></td>
+        <td>
+          <div class="score">26,6</div>
+          <div class="score-bar"><div class="score-bar-fill" style="width:34%"></div></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footnote">
+    <strong>Como funciona o score.</strong> Títulos ponderados + média geral de gols ×6 + (G+A) na Copa do Mundo ponderados por fase ÷ jogos ×20 + ligas nacionais ×0,5.
+    Somente dados oficiais. Pesos por fase: Grupos ×1 · Oitavas ×1,5 · Quartas ×2 · Semifinal ×2,5 · Final ×3 (3º lugar tratado como semifinal).
+    Ligas: apenas campeonatos nacionais de 1ª divisão.<br>
+    <strong>Novidades da v6:</strong> Messi somou a campanha de 2026 (8 gols, 4 assistências, vice-campeão) à sua base oficial da v5 e subiu de 59,3 para 65,2 pts.
+    Mbappé é novo na lista — artilheiro da Copa 2026 (10 gols, 4 assistências, recorde de gols em mata-mata), mas a França parou na semifinal e perdeu o
+    3º lugar para a Inglaterra (6-4). A base de carreira do Mbappé pré-2026 foi reconstruída a partir de dados públicos, não fazia parte da v5 original.
+  </div>
+
+  <div class="footer">
+    <span>Metodologia &amp; criação: Marcelo Carvalho · 2026 (v6)</span>
+    <span><a href="https://linkedin.com/in/earth-marcelo">linkedin.com/in/earth-marcelo</a> &nbsp;·&nbsp; <a href="https://github.com/earth-marcelo">github.com/earth-marcelo</a></span>
+  </div>
+</div>
+</body>
+</html>
